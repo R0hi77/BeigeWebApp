@@ -8,6 +8,7 @@ from flask import current_app,g
 
 def get_db():
     """ function to connect to the database """
+    
     if "db" not in g:
         g.db = sqlite3.connect(
             current_app.config["DATABASE"],
@@ -28,7 +29,7 @@ def init_db():
     db = get_db()
 
     with current_app.open_resource("schema.sql") as f:
-        db.executescript(f.read().decode("utf-8"))
+        db.executescript(f.read().decode("utf8"))
 
 @click.command("init-db")
 def init_db_command():
